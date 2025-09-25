@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Radio Estrela Da Madrugada</title>
+    <title>Rádio Estrela da Madrugada</title>
     
     <style>
         /* --- Configurações Globais e Fundo --- */
         :root {
-            --background-color: #03253e; /* Fundo já está na cor solicitada */
+            --background-color: #03253e;
         }
 
         * {
@@ -20,20 +20,19 @@
         body {
             background-color: var(--background-color);
             color: #fff;
-            /* Centraliza a caixa de vidro na tela */
             display: flex;
             justify-content: flex-end; /* Alinha a caixa à direita */
             align-items: center;
             min-height: 100vh;
-            padding: 0 5%; /* Adiciona um espaço na lateral direita */
+            padding: 0 5%;
             overflow: hidden;
         }
 
         /* --- Caixa de Vidro --- */
         .info-container {
             min-width: 300px;
-            cursor: pointer; /* Muda o cursor para indicar que é interativo */
-            user-select: none; /* Impede a seleção do texto */
+            user-select: none;
+            position: relative;
         }
         
         .glass-box {
@@ -42,8 +41,6 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
             position: relative;
-
-            /* Efeito Vidro Desfocado (Frosted Glass) */
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -51,7 +48,7 @@
 
         .xat-link {
             font-family: 'Arial', sans-serif;
-            font-size: 1.425rem; /* Reduzido em 5% */
+            font-size: 1.425rem;
             font-weight: bold;
             color: #93d0f1;
             text-align: center;
@@ -77,7 +74,7 @@
             }
         }
 
-        /* Adicionando delay para cada letra para criar um efeito de onda */
+        /* Ajustado o delay para o novo comprimento do texto "Rádio Estrela da Madrugada" (26 caracteres) */
         .xat-link span:nth-child(1) { animation-delay: 0s; }
         .xat-link span:nth-child(2) { animation-delay: 0.1s; }
         .xat-link span:nth-child(3) { animation-delay: 0.2s; }
@@ -104,10 +101,6 @@
         .xat-link span:nth-child(24) { animation-delay: 2.3s; }
         .xat-link span:nth-child(25) { animation-delay: 2.4s; }
         .xat-link span:nth-child(26) { animation-delay: 2.5s; }
-        .xat-link span:nth-child(27) { animation-delay: 2.6s; }
-        .xat-link span:nth-child(28) { animation-delay: 2.7s; }
-        .xat-link span:nth-child(29) { animation-delay: 2.8s; }
-        .xat-link span:nth-child(30) { animation-delay: 2.9s; }
 
 
         /* --- Efeito de Explosão de Notas Musicais --- */
@@ -126,13 +119,13 @@
             color: white;
             font-size: 2rem;
             animation: fly-away 2s ease-out forwards;
-            opacity: 1;
+            opacity: 0.8; /* Opacidade inicial ligeiramente reduzida para mais suavidade */
         }
 
         @keyframes fly-away {
             from {
                 transform: translate(0, 0) rotate(0deg);
-                opacity: 1;
+                opacity: 0.8; /* Opacidade inicial */
             }
             to {
                 transform: translate(var(--x), var(--y)) rotate(var(--r));
@@ -143,7 +136,7 @@
         /* --- Responsividade --- */
         @media (max-width: 768px) {
             body {
-                justify-content: center; /* Centraliza a caixa em telas menores */
+                justify-content: center;
             }
         }
 
@@ -153,7 +146,7 @@
 
     <div class="info-container" id="interactiveBox">
         <div class="glass-box">
-            <p class="xat-link" id="animatedText">Xat.com/RadioEstrelaDaMadrugada</p>
+            <p class="xat-link" id="animatedText">Rádio Estrela da Madrugada</p>
         </div>
     </div>
 
@@ -162,25 +155,19 @@
     <script>
         // --- Animação de Letras ---
         const textElement = document.getElementById('animatedText');
-        const text = textElement.innerText;
-        textElement.innerHTML = '';
-        for (let i = 0; i < text.length; i++) {
-            const char = text[i];
+        const originalText = "Rádio Estrela da Madrugada"; // Novo texto para a animação
+        textElement.innerHTML = ''; // Limpa o conteúdo original
+        for (let i = 0; i < originalText.length; i++) {
+            const char = originalText[i];
             const span = document.createElement('span');
             span.innerText = char;
             textElement.appendChild(span);
         }
 
-        // --- Explosão de Notas Musicais ---
+        // --- Efeito Constante de Notas Musicais ---
         const interactiveBox = document.getElementById('interactiveBox');
         const notesContainer = document.getElementById('notes-container');
         const musicalNotes = ['♪', '♫', '♬', '♭', '♮', '♯'];
-
-        interactiveBox.addEventListener('mouseenter', (event) => {
-            for (let i = 0; i < 30; i++) {
-                createNote();
-            }
-        });
 
         function createNote() {
             const note = document.createElement('div');
@@ -188,19 +175,22 @@
             
             note.innerText = musicalNotes[Math.floor(Math.random() * musicalNotes.length)];
             
-            const startX = Math.random() * window.innerWidth;
-            const startY = Math.random() * window.innerHeight;
+            // Posição inicial no CENTRO da caixa interativa
+            const boxRect = interactiveBox.getBoundingClientRect();
+            const startX = boxRect.left + boxRect.width / 2;
+            const startY = boxRect.top + boxRect.height / 2;
 
             note.style.left = `${startX}px`;
             note.style.top = `${startY}px`;
             
-            const endX = (Math.random() - 0.5) * 500;
-            const endY = (Math.random() - 0.5) * 500;
-            const rotation = (Math.random() - 0.5) * 720;
-            const size = Math.random() * 1.5 + 1;
+            // Destino aleatório para criar o efeito "subindo e espalhando suavemente"
+            const endX = (Math.random() - 0.5) * 200 + startX; // Menos espalhado horizontalmente (200px)
+            const endY = (Math.random() - 1.2) * 250 + startY; // Principalmente subindo, com um pouco menos de altura (250px)
+            const rotation = (Math.random() - 0.5) * 360; // Rotação um pouco menor
+            const size = Math.random() * 1 + 0.8; // Tamanho das notas ligeiramente menor e mais consistente
 
-            note.style.setProperty('--x', `${endX}px`);
-            note.style.setProperty('--y', `${endY}px`);
+            note.style.setProperty('--x', `${endX - startX}px`);
+            note.style.setProperty('--y', `${endY - startY}px`);
             note.style.setProperty('--r', `${rotation}deg`);
             note.style.fontSize = `${size}rem`;
 
@@ -208,8 +198,11 @@
 
             setTimeout(() => {
                 note.remove();
-            }, 2000);
+            }, 2000); // Deve ser igual ao tempo da animação (2s)
         }
+
+        // Gera notas musicais a cada 250 milissegundos para um fluxo mais contínuo e suave
+        setInterval(createNote, 250); 
     </script>
 
 </body>
