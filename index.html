@@ -8,7 +8,7 @@
     <style>
         /* --- Configurações Globais e Fundo --- */
         :root {
-            --background-color: #03253e; /* Alterado para o novo fundo */
+            --background-color: #03253e; /* Fundo já está na cor solicitada */
         }
 
         * {
@@ -51,9 +51,9 @@
 
         .xat-link {
             font-family: 'Arial', sans-serif;
-            font-size: 1.425rem; /* Reduzido em 5% (1.5rem * 0.95 = 1.425rem) */
+            font-size: 1.425rem; /* Reduzido em 5% */
             font-weight: bold;
-            color: #93d0f1; /* Alterado para a nova cor do texto */
+            color: #93d0f1;
             text-align: center;
         }
         
@@ -73,12 +73,11 @@
             50% {
                 opacity: 1;
                 transform: scale(1.05);
-                /* Sombra de texto ajustada para a nova cor */
                 text-shadow: 0 0 8px rgba(147, 208, 241, 0.7); 
             }
         }
 
-        /* Adicionando delay para cada letra para criar um efeito de onda (ATUALIZADO PARA O NOVO TEXTO) */
+        /* Adicionando delay para cada letra para criar um efeito de onda */
         .xat-link span:nth-child(1) { animation-delay: 0s; }
         .xat-link span:nth-child(2) { animation-delay: 0.1s; }
         .xat-link span:nth-child(3) { animation-delay: 0.2s; }
